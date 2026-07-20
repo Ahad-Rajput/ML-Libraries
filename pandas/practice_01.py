@@ -48,8 +48,51 @@ df = pd.DataFrame(data, index=['a', 'b', 'c', 'd', 'e'])  # give name to indexes
 # print(df.loc[1])   # return one or more specified row(s)
 # print(df.loc[[0,1]])  # for multiple values use double brackest [[]]
 
-print(df.loc[['d', 'e']])  # Use the named index in the loc attribute to return the specified row(s)
+# print(df.loc[['d', 'e']])  # Use the named index in the loc attribute to return the specified row(s)
 
 # ----------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------
 
+
+# ----------- Read CSV file -------------
+
+# --------> With to_string()
+
+df = pd.read_csv('data.csv')
+# print(df.to_string())    #  use to_string() to print the entire dataframe
+
+# --------> Without to_string()
+
+# print(df)
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------
+
+
+# ----------- Read json file -------------
+
+df_2 = pd.read_json('data.json')
+# print(df_2)
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------------
+
+
+# ----------- Analyzing DataFrame -------------
+
+# ----------> head()
+
+# print(df.head())   # Print the first 5 rows of the DataFrame
+# print(df.head(10)) # printing the first 10 rows of the DataFrame
+
+
+# ----------> tail()
+
+# print(df.tail())   # Print the last 5 rows of the DataFrame
+
+
+# ----------> info()
+
+# print(df.info())   # Print information about the data
