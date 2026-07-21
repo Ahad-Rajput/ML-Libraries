@@ -127,3 +127,25 @@ df.fillna({"Calories": x}, inplace=True)
 
 # print(df.to_string())  # In row 18 and 28, the empty value from "Calories" was replaced with the mode: 300.0
 
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# --------------------------------- Cleaning Data of Wrong Format ---------------------------------------
+
+"""
+Cells with data of wrong format can make it difficult, or even impossible, to analyze data.
+
+To fix it, you have two options: remove the rows, or convert all cells in the columns into the same format.
+
+In our DataFrame, we have two cells with the wrong format. For row 22 and 26, the 'Date' column should be a string that represents a date
+"""
+
+df['Date'] = pd.to_datetime(df["Date"], format='mixed')
+print(df.to_string())
+
+"""
+As you can see from the result, the date in row 26 was fixed, but the empty date in row 22 got a NaT (Not a Time) value, in other words an empty value. One way to deal with empty values is simply removing the entire row and we can remove the row by using the dropna() method.
+
+"""
