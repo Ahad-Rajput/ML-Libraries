@@ -143,9 +143,68 @@ In our DataFrame, we have two cells with the wrong format. For row 22 and 26, th
 """
 
 df['Date'] = pd.to_datetime(df["Date"], format='mixed')
-print(df.to_string())
+# print(df.to_string())
 
 """
 As you can see from the result, the date in row 26 was fixed, but the empty date in row 22 got a NaT (Not a Time) value, in other words an empty value. One way to deal with empty values is simply removing the entire row and we can remove the row by using the dropna() method.
 
 """
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# --------------------------------- Fixing Wrong Data ---------------------------------------
+
+# ----------> Replacing Values:
+
+df.loc[7,'Duration'] = 45   # Set "Duration" = 45 in row 7
+# print(df.to_string())
+
+"""
+For small data sets you might be able to replace the wrong data one by one, but not for big data sets.
+
+To replace wrong data for larger data sets you can create some rules, e.g. set some boundaries for legal values, and replace any values that are outside of the boundaries.
+"""
+
+for x in df.index:   # Loop through all values in the "Duration" column. If the value is higher than 60, set it to 60:
+    if df.loc[x,'Duration'] > 60: df.loc[x,'Duration'] = 60
+
+# print(df.to_string())
+    
+
+# ----------> Replacing Values:
+"""
+Another way of handling wrong data is to remove the rows that contains wrong data.
+
+This way you do not have to find out what to replace them with, and there is a good chance you do not need them to do your analyses.
+"""
+
+for x in df.index:
+    if df.loc[x, 'Duration'] > 60: df.drop(x, inplace=True)   # Delete rows where "Duration" is higher than 60
+
+# print(df.to_string())
+
+
+# -------------------------------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# --------------------------------- Removing Duplicates ---------------------------------------
+
+# ----------> Discovering Duplicates:
+"""
+To discover duplicates, we can use the duplicated() method.
+
+The duplicated() method returns a Boolean values for each row
+"""
+
+# print(df.duplicated())  # row 11 and 12 are duplicates.
+
+
+# ----------> Removing Duplicates:
+
+df.drop_duplicates(inplace=True)
+
+print(df.to_string())
